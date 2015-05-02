@@ -241,17 +241,19 @@ class MediaInfo {
                 break;
             }
         }
-        if($level === $nodeLevel && $descendantLevel === $nodeLevel) {
-            $childPath = array();
-            return 'SELF';
-        }
-        if($level === $nodeLevel && $descendantLevel === ($nodeLevel + 1)) {
-            $childPath = array_slice($descendant, $nodeLevel);
-            return 'CHILD';
-        }
-        if($level === $nodeLevel && $descendantLevel  >  ($nodeLevel + 1)) {
-            $childPath = array_slice($descendant, $nodeLevel);
-            return 'DESCENDANT';
+        if($level === $nodeLevel) {
+            if($descendantLevel === $nodeLevel) {
+                $childPath = array();
+                return 'SELF';
+            }
+            if($descendantLevel === ($nodeLevel + 1)) {
+                $childPath = array_slice($descendant, $nodeLevel);
+                return 'CHILD';
+            }
+            if($descendantLevel  >  ($nodeLevel + 1)) {
+                $childPath = array_slice($descendant, $nodeLevel);
+                return 'DESCENDANT';
+            }
         }
         return 'UNRELATED';
     }

@@ -4,7 +4,7 @@ require_once __DIR__ . '/../MediaInfo.class.php';
 class VideoInfoTest extends PHPUnit_Framework_TestCase  {
 
     public function testDetectTreePathRelation() {
-        $method = new ReflectionMethod('VideoInfo', 'detectTreePathRelation');
+        $method = new ReflectionMethod('MediaInfo', 'detectTreePathRelation');
         $method->setAccessible(true);
 
         $this->assertEquals('SELF',       $method->invoke(null, '/video/1', '/video/1'));
