@@ -4,6 +4,7 @@ require_once __DIR__ . '/AnimebrakeCLI/config.inc.php';
 require_once __DIR__ . '/AnimebrakeCLI/MediaInfo.class.php';
 
 $path = _cp(@$argv[1]);
+$videoEncoder = 'x265';
 $videoQuality = 20;
 $audioBitrate = 160;
 
@@ -43,7 +44,7 @@ foreach(glob($path) as $input) {
         "--format mp4",
         "--markers",
         // Video Options
-        "--encoder x265",
+        "--encoder {$videoEncoder}",
         "--encoder-preset=fast",
         "--encoder-tune=\"ssim\"",
         "--quality {$videoQuality}",
