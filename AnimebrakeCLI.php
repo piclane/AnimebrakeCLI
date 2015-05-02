@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/cygwin.inc.php';
-require_once __DIR__ . '/AnimebrakeCLI/config.inc.php';
-require_once __DIR__ . '/AnimebrakeCLI/MediaInfo.class.php';
+require_once __DIR__ . '/config.inc.php';
+require_once __DIR__ . '/MediaInfo.class.php';
 
 $path = _cp(@$argv[1]);
 $videoEncoder = 'x265';
