@@ -1,9 +1,8 @@
 <?php
-require_once __DIR__.'/cygwin.inc.php';
+require_once __DIR__ . '/cygwin.inc.php';
 require_once __DIR__ . '/AnimebrakeCLI/config.inc.php';
 require_once __DIR__ . '/AnimebrakeCLI/MediaInfo.class.php';
 
-//$path = _cp('I:\BD\フォトカノ\フォトカノ #1 「出会い」.ts');
 $path = _cp(@$argv[1]);
 $videoQuality = 20;
 $audioBitrate = 160;
