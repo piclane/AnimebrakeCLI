@@ -17,11 +17,16 @@ if(empty($path)) {
 }
 
 if(is_dir($path)) {
-    $path = "{$path}/*.*";
-} else if(!file_exists($path)) {
+    $paths = glob("{$path}/*.*");
+} else if(is_file($path)) {
+    $paths = array($path);
+} else {
+    $paths = glob($path);
+}
+if(empty($paths)) {
     die("{$path} is not found.\n");
 }
-foreach(glob($path) as $input) {
+foreach($paths as $input) {
     echo "Scanning {$input}...\n";
     $videoInfo = MediaInfo::scan($input);
     $pathInfo = pathinfo($input);
