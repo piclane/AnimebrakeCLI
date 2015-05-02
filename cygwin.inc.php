@@ -1,5 +1,8 @@
 <?php
 
+/** @const cygwin 環境の時 true そうでない時 false */
+define('IS_CYGWIN_ENV', strpos(php_uname('s'), 'CYGWIN') !== false);
+
 /**
  * Windows パスを Cygwin パスに変換
  *
@@ -9,6 +12,9 @@
 function _cp($path) {
     if(empty($path)) {
         return '';
+    }
+    if(!IS_CYGWIN_ENV) {
+        return $path;
     }
     $path = trim($path);
     $path = str_replace('\\', '/', $path);
