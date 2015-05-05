@@ -2,12 +2,15 @@
 require_once __DIR__ . '/cygwin.inc.php';
 require_once __DIR__ . '/config.inc.php';
 require_once __DIR__ . '/MediaInfo.class.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
-$inputPath = _cp(@$argv[1]);
-$outputPath = 'D:/Encoded';
-$videoEncoder = 'x265';
-$videoQuality = 20;
-$audioBitrate = 160;
+$cmd = buildCommand();
+$inputPath = $cmd['input'];
+$outputPath = $cmd['output'];
+$videoEncoder = $cmd['vencoder'];
+$videoQuality = $cmd['vquality'];
+$audioEncoder = $cmd['aencoder'];
+$audioBitrate = $cmd['abitrate'];
 
 // 引数が空の時は入力ソースの入力を求めるプロンプトを表示する
 if(empty($inputPath)) {
@@ -147,4 +150,59 @@ function getTerminalColumns($def = 80) {
     } else {
         return $def;
     }
+}
+
+/**
+ * コマンドラインからのオプションパーサーを取得します
+ *
+ * @return \Commando\Command オプションパーサー
+ */
+function buildCommand() {
+    $cmd = new Commando\Command();
+
+    $cmd->option('i')
+        ->aka("input")
+        ->map(function($value) { return _cp($value); })
+        ->describe("入力ファイル");
+
+    $cmd->option('o')
+        ->aka('output')
+        ->default(_cp(getcwd()))
+        ->map(function($value) { return _cp($value); })
+        ->describe('出力ファイル');
+
+    $cmd->option('e')
+        ->aka('encoder')
+        ->aka('vencoder')
+        ->default('x265')
+        ->describe(
+            "映像エンコーダーを指定します。\n".
+            '"x264", "x265", "ffmpeg4", "ffmpeg2", "theora" から選択してください。');
+
+    $cmd->option('q')
+        ->aka('quality')
+        ->aka('vquality')
+        ->map(function($value) { return intval($value); })
+        ->default(20)
+        ->describe(
+            "映像の品質をコントロールします。\n".
+            "デフォルト値は 20 です。");
+
+    $cmd->option('E')
+        ->aka('aencoder')
+        ->default('av_aac')
+        ->describe(
+            "音声エンコーダーを指定します：\n",
+            "\"av_aac\", \"fdk_aac\", \"fdk_haac\", \"copy:aac\", \"ac3\", \n".
+            "\"copy:ac3\", \"copy:dts\", \"copy:dtshd\", \"mp3\", \"copy:mp3\", \n".
+            "\"vorbis\", \"flac16\", \"flac24\", \"copy\" から選択してください。");
+
+    $cmd->option('B')
+        ->aka('ab')
+        ->aka('abitrate')
+        ->default(160)
+        ->describe(
+            '平均音声ビットレートを指定します。');
+
+    return $cmd;
 }

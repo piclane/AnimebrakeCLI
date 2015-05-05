@@ -1,0 +1,17 @@
+{
+  "name": "piclane/AnimebrakeCLI",
+  "description": "Encode helper for HandbrakeCLI",
+  "homepage": "https://github.com/piclane/AnimebrakeCLI",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Yohei Hina",
+      "email": "piclane@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.3",
+    "nategood/commando": "*"
+  },
+  "version": "0.1.0"
+}
