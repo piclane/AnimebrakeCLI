@@ -13,10 +13,10 @@ function _cp($path) {
     if(empty($path)) {
         return '';
     }
+    $path = trim($path);
     if(!IS_CYGWIN_ENV) {
         return $path;
     }
-    $path = trim($path);
     $path = str_replace('\\', '/', $path);
     if(preg_match('!^[\'"](.*)[\'"]$!', $path, $matches)) {
         $path = $matches[1];
