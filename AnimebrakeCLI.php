@@ -148,7 +148,7 @@ class VideoFile {
 function getTerminalColumns($def = 80) {
     $cols = exec('tput cols', $output, $retval);
     if($retval === 0) {
-        return intval($cols);
+        return intval($cols) - 1;
     } else {
         return $def;
     }
