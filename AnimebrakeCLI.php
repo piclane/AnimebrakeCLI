@@ -9,6 +9,7 @@ $inputPath = $cmd['input'];
 $outputPath = $cmd['output'];
 $videoEncoder = $cmd['vencoder'];
 $videoQuality = $cmd['vquality'];
+$videoWidth = $cmd['width'];
 $audioEncoder = $cmd['aencoder'];
 $audioBitrate = $cmd['abitrate'];
 
@@ -49,7 +50,8 @@ foreach($videos as $video) {
     echo "\n";
 
     $videoInfo = MediaInfo::scan($video->input);
-    $videoWidth = $videoInfo->get('/video/1', 'Width');
+    $videoSrcWidth = $videoInfo->get('/video/1', 'Width');
+    $videoDstWidth = $videoWidth < 10 ? $videoWidth * $videoSrcWidth : $videoWidth;
     $videoIsInterlaced = $videoInfo->is('/video/1', 'Scan type', 'interlaced');
     $audioNums = $videoInfo->countChildren('/audio');
 
@@ -67,7 +69,7 @@ foreach($videos as $video) {
         "--quality {$videoQuality}",
         "--vfr",
         // Picture Settings
-        "--width {$videoWidth}",
+        "--width {$videoDstWidth}",
         "--crop 0:0:0:0",
         "--loose-anamorphic",
         "--modulus 2",
@@ -187,6 +189,12 @@ function buildCommand() {
         ->describe(
             "映像の品質をコントロールします。\n".
             "デフォルト値は 20 です。");
+
+    $cmd->option('w')
+        ->aka('width')
+        ->default(1.0)
+        ->describe(
+            '映像の幅を指定します。');
 
     $cmd->option('E')
         ->aka('aencoder')
