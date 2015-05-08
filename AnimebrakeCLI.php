@@ -48,7 +48,7 @@ foreach($videos as $video) {
 
     $videoInfo = MediaInfo::scan($video->input);
     $videoSrcWidth = $videoInfo->get('/video/1', 'Width');
-    $videoDstWidth = $videoWidth < 10 ? $videoWidth * $videoSrcWidth : $videoWidth;
+    $videoDstWidth = $videoWidth <= 10 ? $videoWidth * $videoSrcWidth : $videoWidth;
     $videoIsInterlaced = $videoInfo->is('/video/1', 'Scan type', 'interlaced');
     $audioNums = $videoInfo->countChildren('/audio');
 
@@ -189,9 +189,10 @@ function buildCommand($argv = null) {
 
     $cmd->option('w')
         ->aka('width')
+        ->aka('vwidth')
         ->default(1.0)
         ->describe(
-            '映像の幅を指定します。');
+            "映像の幅(ピクセル)を指定します。10以下の値を指定した時は倍率としてみなされます。");
 
     $cmd->option('E')
         ->aka('aencoder')
