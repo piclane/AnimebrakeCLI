@@ -159,8 +159,8 @@ function getTerminalColumns($def = 80) {
  *
  * @return \Commando\Command オプションパーサー
  */
-function buildCommand() {
-    $cmd = new Commando\Command();
+function buildCommand($argv = null) {
+    $cmd = new Commando\Command($argv);
 
     $cmd->option('i')
         ->aka("input")
