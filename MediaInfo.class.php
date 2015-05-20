@@ -80,16 +80,16 @@ class MediaInfo {
         if($key === 'scan type') {
             return strtolower($value);
         }
-        if($key === 'duration' && preg_match('/^((\d+) h\s*)?((\d+) mn\s*)?((\d+) s\s*)?$/', $value, $matches)) {
+        if($key === 'duration' && preg_match('/^((\d+)\s*h\s*)?((\d+)\s*mn\s*)?((\d+)\s*s\s*)?$/', $value, $matches)) {
             $duration = 'PT';
             if(!empty($matches[2])) {
                 $duration .= "{$matches[2]}H";
             }
             if(!empty($matches[4])) {
-                $duration .= "{$matches[2]}M";
+                $duration .= "{$matches[4]}M";
             }
             if(!empty($matches[6])) {
-                $duration .= "{$matches[2]}S";
+                $duration .= "{$matches[6]}S";
             }
             $value = new DateInterval($duration);
         }
