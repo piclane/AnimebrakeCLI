@@ -17,5 +17,5 @@ function _cp($path) {
     if(!IS_CYGWIN_ENV) {
         return $path;
     }
-    return exec("cygpath -u '{$path}''");
+    return exec("cygpath -u '{$path}'");
 }
