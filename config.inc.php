@@ -2,7 +2,9 @@
 require_once __DIR__ . '/cygwin.inc.php';
 
 if (stristr(PHP_OS, 'win') && !stristr(PHP_OS, 'darwin')) {
-    $BIN_HANDBRAKECLI = _cp('C:\Program Files (x86)\Handbrake\HandBrakeCLI.exe');
+    $BIN_HANDBRAKECLI_86 = _cp('C:\Program Files (x86)\Handbrake\HandBrakeCLI.exe');
+    $BIN_HANDBRAKECLI_64 = _cp('C:\Program Files\Handbrake\HandBrakeCLI.exe');
+    $BIN_HANDBRAKECLI = is_file($BIN_HANDBRAKECLI_86) ? $BIN_HANDBRAKECLI_86 : $BIN_HANDBRAKECLI_64;
     $BIN_MEDIAINFO =  _cp('C:\Program Files\MediaInfo\MediaInfo.exe');
 } else {
     $BIN_HANDBRAKECLI = '/usr/local/bin/HandBrakeCLI';
