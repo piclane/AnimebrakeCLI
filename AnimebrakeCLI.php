@@ -90,7 +90,7 @@ foreach($videos as $video) {
     echo "$ {$exec}\n\n";
     @unlink($video->outputTemp);
     passthru($exec);
-    rename($video->outputTemp, $video->output);
+    @rename($video->outputTemp, $video->output);
     echo "\n";
 }
 
