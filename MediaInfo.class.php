@@ -18,6 +18,7 @@ class MediaInfo {
      */
     public static function scan($videoPath) {
         $videoInfo = new MediaInfo();
+        $videoPath = _wp($videoPath);
 
         $lines = array();
         $currentTreePath = '/';

@@ -53,11 +53,13 @@ foreach($videos as $video) {
     $videoIsInterlaced = $videoInfo->is('/video/1', 'Scan type', 'interlaced');
     $audioNums = $videoInfo->countChildren('/audio');
 
+    $hbInput = _wp($video->input);
+    $hbOutput = _wp($video->outputTemp);
     $options = implode(' ', array(
         // Source Options
-        "--input \"{$video->input}\"",
+        "--input \"{$hbInput}\"",
         // Destination Options
-        "--output \"{$video->outputTemp}\"",
+        "--output \"{$hbOutput}\"",
         "--format mp4",
         "--markers",
         // Video Options
