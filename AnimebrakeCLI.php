@@ -32,7 +32,6 @@ if(empty($inputPaths)) {
 }
 
 natcasesort($inputPaths);
-var_dump($inputPaths);
 $videos = VideoFile::fromPaths($inputPaths, $outputPath);
 /** @var VideoFile $video */
 foreach($videos as $video) {
