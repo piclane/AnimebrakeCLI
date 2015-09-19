@@ -67,7 +67,7 @@ foreach($videos as $video) {
         "--encoder {$videoEncoder}",
         "--encoder-preset=fast",
         "--encoder-tune=\"ssim\"",
-        "--encoder-profile=\"Auto\"",
+        "--encoder-profile=\"Main\"",
         "--quality {$videoQuality}",
         "--vfr",
         // Picture Settings
@@ -87,6 +87,7 @@ foreach($videos as $video) {
         // Filters
         ($videoIsInterlaced ? '--deinterlace="fast"' : ''),
         // Misc.
+        "--use-hwd",
         "--verbose=0",
     ));
     $exec = "nice -n 10 \"".BIN_HANDBRAKECLI."\" {$options}";
