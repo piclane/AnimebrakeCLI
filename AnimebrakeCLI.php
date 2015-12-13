@@ -67,7 +67,7 @@ foreach($videos as $video) {
         "--encoder {$videoEncoder}",
         "--encoder-preset=fast",
         "--encoder-tune=\"ssim\"",
-        "--encoder-profile=\"Main\"",
+        "--encoder-profile=\"Auto\"",
         "--quality {$videoQuality}",
         "--vfr",
         // Picture Settings
