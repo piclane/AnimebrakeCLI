@@ -54,13 +54,13 @@ foreach($videos as $video) {
                          $videoInfo->is('/video/1', 'Scan type', 'mbaff');
     $audioNums = $videoInfo->countChildren('/audio');
 
-    $hbInput = _wp($video->input);
-    $hbOutput = _wp($video->outputTemp);
+    $hbInput = escapeshellarg(_wp($video->input));
+    $hbOutput = escapeshellarg(_wp($video->outputTemp));
     $options = implode(' ', array(
         // Source Options
-        "--input \"{$hbInput}\"",
+        "--input {$hbInput}",
         // Destination Options
-        "--output \"{$hbOutput}\"",
+        "--output {$hbOutput}",
         "--format mp4",
         "--markers",
         // Video Options
