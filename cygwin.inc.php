@@ -34,5 +34,6 @@ function _wp($path) {
     if(!IS_CYGWIN_ENV) {
         return $path;
     }
+    $path = str_replace("'", "'\"'\"'", $$path);
     return exec("cygpath -w '{$path}'");
 }
