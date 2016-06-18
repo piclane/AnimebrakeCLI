@@ -86,7 +86,7 @@ foreach($videos as $video) {
         "--drc ".implode(',', array_fill(0, $audioNums, '0')),
         "--gain ".implode(',', array_fill(0, $audioNums, '0')),
         // Filters
-        ($videoIsInterlaced ? '--deinterlace="fast"' : ''),
+        ($videoIsInterlaced ? '--deinterlace fast' : ''),
         // Misc.
         "--use-hwd",
         "--verbose=0",
