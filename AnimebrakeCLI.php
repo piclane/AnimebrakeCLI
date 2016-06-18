@@ -65,11 +65,12 @@ foreach($videos as $video) {
         "--markers",
         // Video Options
         "--encoder {$videoEncoder}",
-        "--encoder-preset=fast",
-        "--encoder-tune=\"ssim\"",
-        "--encoder-profile=\"Auto\"",
+        "--encoder-preset fast",
+        "--encoder-tune ssim",
+        "--encoder-profile Auto",
         "--quality {$videoQuality}",
-        "--vfr",
+        "--pfr",
+        "--rate 60",
         // Picture Settings
         "--width {$videoDstWidth}",
         "--crop 0:0:0:0",
