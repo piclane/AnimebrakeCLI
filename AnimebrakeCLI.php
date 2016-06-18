@@ -77,8 +77,8 @@ foreach($videos as $video) {
         "--modulus 2",
         // Audio Options
         "--audio ".implode(',', range(1, $audioNums)),
-        "--aencoder ".implode(',', array_fill(0, $audioNums, 'av_aac')),
-        "--audio-fallback ac3",
+        "--aencoder ".implode(',', array_fill(0, $audioNums, 'copy:aac')),
+        "--audio-fallback av_aac",
         "--ab ".implode(',', array_fill(0, $audioNums, $audioBitrate)),
         "--mixdown ".implode(',', array_fill(0, $audioNums, 'dpl2')),
         "--arate ".implode(',', array_fill(0, $audioNums, 'Auto')),
