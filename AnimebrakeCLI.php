@@ -64,10 +64,10 @@ foreach($videos as $video) {
         "--format mp4",
         "--markers",
         // Video Options
-        "--encoder {$videoEncoder}",
-        "--encoder-preset fast",
-        "--encoder-tune ssim",
-        "--encoder-profile Auto",
+        "--encoder=\"{$videoEncoder}\"",
+        "--encoder-preset=\"fast\"",
+        "--encoder-tune=\"ssim\"",
+        "--encoder-profile=\"Auto\"",
         "--quality {$videoQuality}",
         "--pfr",
         "--rate 60",
@@ -86,10 +86,10 @@ foreach($videos as $video) {
         "--drc ".implode(',', array_fill(0, $audioNums, '0')),
         "--gain ".implode(',', array_fill(0, $audioNums, '0')),
         // Filters
-        ($videoIsInterlaced ? '--deinterlace fast' : ''),
+        ($videoIsInterlaced ? '--deinterlace="bob"' : ''),
         // Misc.
         "--use-hwd",
-        "--verbose=0",
+        "--verbose 0",
     ));
     $exec = "nice -n 10 \"".BIN_HANDBRAKECLI."\" {$options}";
 
