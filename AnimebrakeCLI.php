@@ -49,7 +49,7 @@ foreach($videos as $video) {
 
     $videoInfo = MediaInfo::scan($video->input);
     $videoSrcWidth = $videoInfo->get('/video/1', 'Width');
-    $videoDstWidth = $videoWidth <= 10 ? $videoWidth * $videoSrcWidth : $videoWidth;
+    $videoDstWidth = $videoWidth <= 10 ? $videoWidth * $videoSrcWidth : min($videoWidth, $videoSrcWidth);
     $videoIsInterlaced = $videoInfo->is('/video/1', 'Scan type', 'interlaced') ||
                          $videoInfo->is('/video/1', 'Scan type', 'mbaff');
     $audioNums = $videoInfo->countChildren('/audio');
