@@ -64,7 +64,7 @@ foreach($videos as $video) {
         "--format mp4",
         "--markers",
         // Video Options
-        "--encoder=\"{$videoEncoder}\"",
+        "--encoder {$videoEncoder}",
         "--encoder-preset=\"fast\"",
         "--encoder-tune=\"ssim\"",
         "--encoder-profile=\"Auto\"",
@@ -89,7 +89,7 @@ foreach($videos as $video) {
         ($videoIsInterlaced ? '--deinterlace="bob"' : ''),
         // Misc.
         "--use-hwd",
-        "--verbose 0",
+        "--verbose=0",
     ));
     $exec = "nice -n 10 \"".BIN_HANDBRAKECLI."\" {$options}";
 
